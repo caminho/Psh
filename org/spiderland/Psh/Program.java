@@ -19,7 +19,7 @@ package org.spiderland.Psh;
 import java.io.Serializable;
 
 /**
- * A Push program.
+ * A Push program. 
  */
 
 public class Program extends ObjectStack implements Serializable {
