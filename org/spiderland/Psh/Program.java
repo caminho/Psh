@@ -25,15 +25,6 @@ import java.io.Serializable;
 public class Program extends ObjectStack implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	Interpreter _interpreter = null;
-
-	public Interpreter getInterpreter() {
-		return _interpreter;
-	}
-
-	public void setInterpreter(Interpreter _interpreter) {
-		this._interpreter = _interpreter;
-	}
 
 	/**
 	 * Constructs an empty Program.
@@ -44,14 +35,7 @@ public class Program extends ObjectStack implements Serializable {
 	public Program() {
 	}
 
-	/**
-	 * Constructs an empty Program with an associated Interpreter.
-	 */
-
-	public Program(Interpreter inInterpreter) {
-		_interpreter = inInterpreter;
-	}
-
+	
 	/**
 	 * Constructs a copy of an existing Program.
 	 * 
@@ -61,7 +45,6 @@ public class Program extends ObjectStack implements Serializable {
 
 	public Program(Program inOther) {
 		inOther.CopyTo(this);
-		_interpreter = inOther._interpreter;
 	}
 
 	/**
@@ -76,17 +59,6 @@ public class Program extends ObjectStack implements Serializable {
 		Parse(inString);
 	}
 
-	/**
-	 * Constructs a Push program by parsing a String.
-	 * 
-	 * @param inString
-	 *            The Push program string to parse.
-	 */
-
-	public Program(Interpreter _interpreter, String inString) throws Exception {
-		this._interpreter = _interpreter;
-		Parse(inString);
-	}
 
 	/**
 	 * Sets this program to the parsed program string.
@@ -124,7 +96,7 @@ public class Program extends ObjectStack implements Serializable {
 					// a sub-program
 
 					if (!first) {
-						Program p = new Program(_interpreter);
+						Program p = new Program();
 
 						n = p.Parse(inTokens, n + 1);
 

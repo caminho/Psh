@@ -35,7 +35,7 @@ public class PshApplet extends Applet {
 
 		try {
 			Program p;
-			p = new Program( _interpreter, inValue );
+			p = new Program( inValue );
 
 			_interpreter.Execute( p );
 

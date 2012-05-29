@@ -69,7 +69,7 @@ public class FloatSymbolicRegression extends PushGP {
 			}
 		} else {
 			// Get test cases from test-cases.
-			Program caselist = new Program(_interpreter, cases);
+			Program caselist = new Program(cases);
 
 			for (int i = 0; i < caselist.size(); i++) {
 				Program p = (Program) caselist.peek(i);
