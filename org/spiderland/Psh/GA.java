@@ -36,6 +36,7 @@ public abstract class GA implements Serializable {
 	protected float _crossoverPercent;
 
 	protected float _bestMeanFitness;
+	protected float _bestMeanFitnessOfRun;
 	protected double _populationMeanFitness;
 	protected int _bestIndividual;
 
@@ -113,6 +114,7 @@ public abstract class GA implements Serializable {
 		_RNG = new Random();
 		_testCases = new ArrayList<GATestCase>();
 		_bestMeanFitness = Float.MAX_VALUE;
+		_bestMeanFitnessOfRun = _bestMeanFitness;
 		_outputStream = System.out;
 	}
 
@@ -365,6 +367,10 @@ public abstract class GA implements Serializable {
 		}
 
 		_populationMeanFitness = totalFitness / _populations[_currentPopulation].length;
+		
+		if (_bestMeanFitness < _bestMeanFitnessOfRun) {
+			_bestMeanFitnessOfRun = _bestMeanFitness;
+		}
 	}
 
 	/**

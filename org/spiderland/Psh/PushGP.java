@@ -23,7 +23,8 @@ import java.util.*;
  */
 abstract public class PushGP extends GA {
 	private static final long serialVersionUID = 1L;
-
+	protected static final boolean printParameters = false;
+	
 	protected Interpreter _interpreter;
 	protected int _maxRandomCodeSize;
 	protected int _maxPointsInProgram;
@@ -209,36 +210,37 @@ abstract public class PushGP extends GA {
 		super.InitFromParameters();
 
 		// Print important parameters
-		Print("  Important Parameters\n");
-		Print(" ======================\n");
-
-		if(!_targetFunctionString.equals("")){
-			Print("Target Function: " + _targetFunctionString + "\n\n");
+		if (printParameters) {
+			Print("  Important Parameters\n");
+			Print(" ======================\n");
+	
+			if(!_targetFunctionString.equals("")){
+				Print("Target Function: " + _targetFunctionString + "\n\n");
+			}
+			
+			Print("Population Size: " + (int) GetFloatParam("population-size")
+					+ "\n");
+			Print("Generations: " + _maxGenerations + "\n");
+			Print("Execution Limit: " + _executionLimit + "\n\n");
+	
+			Print("Crossover Percent: " + _crossoverPercent + "\n");
+			Print("Mutation Percent: " + _mutationPercent + "\n");
+			Print("Simplification Percent: " + _simplificationPercent + "\n");
+			Print("Clone Percent: "
+					+ (100 - _crossoverPercent - _mutationPercent - _simplificationPercent)
+					+ "\n\n");
+	
+			Print("Tournament Size: " + _tournamentSize + "\n");
+			if (_trivialGeographyRadius != 0) {
+				Print("Trivial Geography Radius: " + _trivialGeographyRadius + "\n");
+			}
+			Print("Node Selection Mode: " + _nodeSelectionMode);
+			Print("\n");
+	
+			Print("Instructions: " + _interpreter.GetInstructionsString() + "\n");
+	
+			Print("\n");
 		}
-		
-		Print("Population Size: " + (int) GetFloatParam("population-size")
-				+ "\n");
-		Print("Generations: " + _maxGenerations + "\n");
-		Print("Execution Limit: " + _executionLimit + "\n\n");
-
-		Print("Crossover Percent: " + _crossoverPercent + "\n");
-		Print("Mutation Percent: " + _mutationPercent + "\n");
-		Print("Simplification Percent: " + _simplificationPercent + "\n");
-		Print("Clone Percent: "
-				+ (100 - _crossoverPercent - _mutationPercent - _simplificationPercent)
-				+ "\n\n");
-
-		Print("Tournament Size: " + _tournamentSize + "\n");
-		if (_trivialGeographyRadius != 0) {
-			Print("Trivial Geography Radius: " + _trivialGeographyRadius + "\n");
-		}
-		Print("Node Selection Mode: " + _nodeSelectionMode);
-		Print("\n");
-
-		Print("Instructions: " + _interpreter.GetInstructionsString() + "\n");
-
-		Print("\n");
-		
 	}
 
 	public void InitIndividual(GAIndividual inIndividual) {
@@ -279,6 +281,10 @@ abstract public class PushGP extends GA {
 
 		_populationMeanFitness = totalFitness
 				/ _populations[_currentPopulation].length;
+		
+		if (_bestMeanFitness < _bestMeanFitnessOfRun) {
+			_bestMeanFitnessOfRun = _bestMeanFitness;
+		}
 	}
 
 	public void EvaluateIndividual(GAIndividual inIndividual) {

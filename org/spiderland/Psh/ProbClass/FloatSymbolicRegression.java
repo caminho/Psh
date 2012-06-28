@@ -62,9 +62,10 @@ public class FloatSymbolicRegression extends PushGP {
 				Float in = (Float) testCase._first;
 				Float out = (Float) testCase._second;
 
-				Print(";; Fitness case #" + i + " input: " + in + " output: "
-						+ out + "\n");
-
+				if (printParameters) {
+					Print(";; Fitness case #" + i + " input: " + in + " output: "
+							+ out + "\n");
+				}
 				_testCases.add(new GATestCase(in, out));
 			}
 		} else {
@@ -81,9 +82,10 @@ public class FloatSymbolicRegression extends PushGP {
 
 				Float in = new Float(p.peek(0).toString());
 				Float out = new Float(p.peek(1).toString());
-
-				Print(";; Fitness case #" + i + " input: " + in + " output: "
-						+ out + "\n");
+				if (printParameters) {
+					Print(";; Fitness case #" + i + " input: " + in + " output: "
+							+ out + "\n");
+				}
 
 				_testCases.add(new GATestCase(in, out));
 			}
