@@ -16,20 +16,17 @@
 
 package org.spiderland.Psh.ProbClass;
 
-import org.spiderland.Psh.PushGPIndividual;
-
-
 /**
  * This problem class implements symbolic regression for floating point numbers.
  * See also IntSymbolicRegression for integer symbolic regression.
  */
 public class FloatSymbolicRegressionShort extends FloatSymbolicRegression {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected String Report() {
-		
+
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append(this._generationCount);
 		sb.append(" ").append(this._averageSize);
 		sb.append(" ").append(this._bestSize);
@@ -37,12 +34,12 @@ public class FloatSymbolicRegressionShort extends FloatSymbolicRegression {
 		sb.append(" ").append(this._bestMeanFitness);
 		sb.append(" ").append(this._bestMeanFitnessOfRun);
 		sb.append("\n");
-		
+
 		return sb.toString();
 	}
 
 	protected String FinalReport() {
 		return "";
 	}
-	
+
 }

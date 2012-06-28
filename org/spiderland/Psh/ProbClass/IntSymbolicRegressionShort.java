@@ -16,16 +16,6 @@
 
 package org.spiderland.Psh.ProbClass;
 
-import org.spiderland.Psh.GAIndividual;
-import org.spiderland.Psh.GATestCase;
-import org.spiderland.Psh.Interpreter;
-import org.spiderland.Psh.ObjectPair;
-import org.spiderland.Psh.Program;
-import org.spiderland.Psh.PushGP;
-import org.spiderland.Psh.PushGPIndividual;
-import org.spiderland.Psh.intStack;
-import org.spiderland.Psh.TestCase.TestCaseGenerator;
-
 /**
  * This problem class implements symbolic regression for integers. See also
  * IntSymbolicRegression for integer symbolic regression.
@@ -34,9 +24,9 @@ public class IntSymbolicRegressionShort extends IntSymbolicRegression {
 	private static final long serialVersionUID = 1L;
 
 	protected String Report() {
-		
+
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append(this._generationCount);
 		sb.append(" ").append(this._averageSize);
 		sb.append(" ").append(this._bestSize);
@@ -44,7 +34,7 @@ public class IntSymbolicRegressionShort extends IntSymbolicRegression {
 		sb.append(" ").append(this._bestMeanFitness);
 		sb.append(" ").append(this._bestMeanFitnessOfRun);
 		sb.append("\n");
-		
+
 		return sb.toString();
 	}
 
