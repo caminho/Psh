@@ -38,6 +38,7 @@ abstract public class PushGP extends GA {
 
 	protected float _averageSize;
 	protected int _bestSize;
+	protected int _bestSizeOfRun;
 
 	protected float _simplificationPercent;
 	protected float _simplifyFlattenPercent;
@@ -286,6 +287,7 @@ abstract public class PushGP extends GA {
 		
 		if (_bestMeanFitness < _bestMeanFitnessOfRun) {
 			_bestMeanFitnessOfRun = _bestMeanFitness;
+			_bestSizeOfRun = _bestSize;
 		}
 	}
 

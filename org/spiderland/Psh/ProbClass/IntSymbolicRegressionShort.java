@@ -30,6 +30,7 @@ public class IntSymbolicRegressionShort extends IntSymbolicRegression {
 		sb.append(this._generationCount);
 		sb.append(" ").append(this._averageSize);
 		sb.append(" ").append(this._bestSize);
+		sb.append(" ").append(this._bestSizeOfRun);
 		sb.append(" ").append(this._populationMeanFitness);
 		sb.append(" ").append(this._bestMeanFitness);
 		sb.append(" ").append(this._bestMeanFitnessOfRun);
