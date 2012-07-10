@@ -278,9 +278,11 @@ abstract public class PushGP extends GA {
 				_bestErrors = i.GetErrors();
 			}
 		}
-
-		_populationMeanFitness = totalFitness
-				/ _populations[_currentPopulation].length;
+		if (Float.isInfinite(totalFitness)) {
+			_populationMeanFitness = Float.MAX_VALUE;
+		} else {
+			_populationMeanFitness = totalFitness / _populations[_currentPopulation].length;
+		}
 		
 		if (_bestMeanFitness < _bestMeanFitnessOfRun) {
 			_bestMeanFitnessOfRun = _bestMeanFitness;
