@@ -21,7 +21,7 @@ import java.io.Serializable;
 /**
  * Abstract class for implementing stacks.
  */
-abstract class Stack implements Serializable {
+abstract class Stack implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
 	protected int _size;
@@ -30,6 +30,17 @@ abstract class Stack implements Serializable {
 	Stack() {
 		_size = 0;
 		resize(8);
+	}
+	
+	@Override
+	public Stack clone() {
+		try {
+			Stack stack = (Stack) super.clone();
+			return stack;
+		} catch (CloneNotSupportedException e) {
+			// never happens
+			throw new InternalError();
+		}
 	}
 
 	abstract void resize(int inSize);

@@ -19,6 +19,8 @@ package org.spiderland.Psh.test;
 import junit.framework.TestCase;
 import org.spiderland.Psh.*;
 
+import ec.util.MersenneTwisterFast;
+
 /**
  *
  * @author robertbaruch
@@ -36,6 +38,7 @@ public class InstructionTest extends TestCase
     protected void setUp() throws Exception
     {
         interpreter = new Interpreter();
+        interpreter.Initialize(new MersenneTwisterFast());
         Program instructionList = new Program("( )");
         interpreter.SetInstructions(instructionList);
         istack = new intStack();

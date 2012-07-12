@@ -16,7 +16,7 @@
 
 package org.spiderland.Psh;
 
-import java.util.Random;
+import ec.util.MersenneTwisterFast;
 
 //
 // All instructions 
@@ -35,6 +35,10 @@ abstract class StackInstruction extends Instruction {
 	StackInstruction(Stack inStack) {
 		_stack = inStack;
 	}
+	
+	public void setStack(Stack _inStack) {
+		this._stack = _inStack;
+	}
 }
 
 /**
@@ -49,6 +53,10 @@ abstract class ObjectStackInstruction extends Instruction {
 
 	ObjectStackInstruction(ObjectStack inStack) {
 		_stack = inStack;
+	}
+	
+	public void setStack(ObjectStack _inStack) {
+		this._stack = _inStack;
 	}
 }
 
@@ -517,10 +525,10 @@ class IntegerLn extends UnaryIntInstruction {
 class IntegerRand extends Instruction {
 	private static final long serialVersionUID = 1L;
 	
-	Random _RNG;
+	MersenneTwisterFast _RNG;
 	
-	IntegerRand(){
-		_RNG = new Random();
+	IntegerRand(MersenneTwisterFast _RNG){
+		this._RNG = _RNG;
 	}
 
 	@Override
@@ -910,16 +918,14 @@ class FloatLn extends UnaryFloatInstruction {
 class FloatRand extends Instruction {
 	private static final long serialVersionUID = 1L;
 	
-	Random _RNG;
+	MersenneTwisterFast _RNG;
 	
-	FloatRand(){
-		_RNG = new Random();
+	FloatRand(MersenneTwisterFast _RNG){
+		this._RNG = _RNG;
 	}
 
 	@Override
 	public void Execute(Interpreter inI) {
-		
-		
 		
 		float range = (inI._maxRandomFloat - inI._minRandomFloat)
 				/ inI._randomFloatResolution;
@@ -1088,10 +1094,10 @@ class BoolNot extends Instruction {
 class BoolRand extends Instruction {
 	private static final long serialVersionUID = 1L;
 	
-	Random _RNG;
+	MersenneTwisterFast _RNG;
 	
-	BoolRand(){
-		_RNG = new Random();
+	BoolRand(MersenneTwisterFast _RNG){
+		this._RNG = _RNG;
 	}
 
 	@Override
@@ -1279,7 +1285,7 @@ class CodeDoTimes extends ObjectStackInstruction {
 
 				if (bodyObj instanceof Program) {
 					// insert integer.pop in front of program
-					((Program) bodyObj).shove("integer.pop", ((Program) bodyObj)._size);
+					((Program) bodyObj).shove("integer.pop", ((ObjectStack) bodyObj)._size);
 				} else {
 					// create a new program with integer.pop in front of
 					// the popped object
@@ -1457,7 +1463,7 @@ class ExecDoTimes extends ObjectStackInstruction {
 
 				if (bodyObj instanceof Program) {
 					// insert integer.pop in front of program
-					((Program) bodyObj).shove("integer.pop", ((Program) bodyObj)._size);
+					((Program) bodyObj).shove("integer.pop", ((ObjectStack) bodyObj)._size);
 				} else {
 					// create a new program with integer.pop in front of
 					// the popped object
@@ -1612,11 +1618,11 @@ class ExecNoop extends Instruction {
 class RandomPushCode extends ObjectStackInstruction {
 	private static final long serialVersionUID = 1L;
 	
-	Random _RNG;
+	MersenneTwisterFast _RNG;
 	
-	RandomPushCode(ObjectStack inStack) {
+	RandomPushCode(ObjectStack inStack, MersenneTwisterFast _RNG) {
 		super(inStack);
-		_RNG = new Random();
+		this._RNG = _RNG;
 	}
 	
 	@Override
@@ -1626,7 +1632,7 @@ class RandomPushCode extends ObjectStackInstruction {
 		if (inI.intStack().size() > 0) {
 			randCodeMaxPoints = inI.intStack().pop();
 			randCodeMaxPoints = Math.min(Math.abs(randCodeMaxPoints),
-					inI._maxRandomCodeSize);
+					inI.getMaxRandomCodeSize());
 
 			int randomCodeSize;
 			if (randCodeMaxPoints > 0) {

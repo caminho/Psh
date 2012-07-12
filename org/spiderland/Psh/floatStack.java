@@ -46,6 +46,13 @@ public class floatStack extends Stack {
 			hash = 41 * hash + Float.valueOf(_stack[i]).hashCode();
 		return hash;
 	}
+	
+	@Override
+	public floatStack clone() {
+		floatStack stack = (floatStack) super.clone();
+		stack._stack = this._stack.clone();
+		return stack;
+	}
 
 	void resize(int inSize) {
 		float newstack[] = new float[inSize];

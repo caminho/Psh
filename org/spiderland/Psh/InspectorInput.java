@@ -18,6 +18,8 @@ package org.spiderland.Psh;
 
 import java.io.*;
 
+import ec.util.MersenneTwisterFast;
+
 /**
  * A utility class to help read PshInspector input files.
  */
@@ -62,6 +64,7 @@ public class InspectorInput {
 	 */
 	private void InitInspectorInput(File inFile) throws Exception {
 		_interpreter = new Interpreter();
+		_interpreter.Initialize(new MersenneTwisterFast());
 
 		// Read fileString
 		String fileString = Params.ReadFileString(inFile);

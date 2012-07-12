@@ -16,10 +16,13 @@
 
 package org.spiderland.Psh;
 
+import java.sql.Time;
 import java.util.*;
 import java.io.*;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import ec.util.MersenneTwisterFast;
 
 /**
  * An abstract class for running genetic algorithms.
@@ -46,7 +49,8 @@ public abstract class GA implements Serializable {
 	protected int _tournamentSize;
 	protected int _trivialGeographyRadius;
 
-	protected Random _RNG;
+	protected MersenneTwisterFast _RNG;
+	protected long _seed;
 
 	protected HashMap<String, String> _parameters;
 	public ArrayList<GATestCase> _testCases;
@@ -58,6 +62,7 @@ public abstract class GA implements Serializable {
 	protected Checkpoint _checkpoint;
 	protected String _checkpointPrefix;
 	protected String _outputfile;
+	
 
 	/**
 	 * Factor method for creating a GA object, with the GA class specified by
@@ -111,7 +116,7 @@ public abstract class GA implements Serializable {
 	}
 
 	protected GA() {
-		_RNG = new Random();
+		_RNG = new MersenneTwisterFast();
 		_testCases = new ArrayList<GATestCase>();
 		_bestMeanFitness = Float.MAX_VALUE;
 		_bestMeanFitnessOfRun = _bestMeanFitness;
@@ -242,6 +247,14 @@ public abstract class GA implements Serializable {
 
 		if (_outputfile != null)
 			_outputStream = new FileOutputStream(new File(_outputfile));
+		
+		if(Float.isNaN(GetFloatParam("seed", true))){
+			_seed = System.currentTimeMillis();
+		}
+		else{
+			_seed = (int) GetFloatParam("seed", true);
+		}
+		this._RNG.setSeed(_seed);
 	}
 
 	/**
@@ -308,7 +321,7 @@ public abstract class GA implements Serializable {
 
 			Checkpoint();
 
-			System.gc();
+			//System.gc();
 			
 			_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
 			_generationCount++;
@@ -499,10 +512,12 @@ public abstract class GA implements Serializable {
 			int index = (_RNG.nextInt(_trivialGeographyRadius * 2) - _trivialGeographyRadius)
 					+ inIndex;
 			if (index < 0)
-				index += inPopsize;
+				while (index < 0)
+					index += inPopsize;
 
 			return (index % inPopsize);
 		} else {
+			if (inPopsize == 0) return 0;
 			return _RNG.nextInt(inPopsize);
 		}
 	}

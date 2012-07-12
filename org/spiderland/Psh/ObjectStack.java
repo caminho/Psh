@@ -40,6 +40,17 @@ public class ObjectStack extends Stack {
 
 		return ((ObjectStack) inOther).comparestack(_stack, _size);
 	}
+	
+	@Override
+	public ObjectStack clone() {
+		ObjectStack stack = (ObjectStack)super.clone();
+		stack._stack = new Object[this._maxsize];
+		// objects need deep cloning
+		for (int i = 0; i < _size; i++) {
+			stack._stack[i] = cloneforprogram(this._stack[i]);
+		}
+		return stack;
+	}
 
 	boolean comparestack(Object inOther[], int inOtherSize) {
 		if (inOtherSize != _size)
@@ -202,4 +213,33 @@ public class ObjectStack extends Stack {
 
 		return result;
 	}
+
+	/**
+	 * Creates a copy of an object suitable for adding to a Push Program. Java's
+	 * clone() is unfortunately useless for this task.
+	 */
+	protected Object cloneforprogram(Object inObject) {
+		// Java clone() is useless :(
+	
+		if (inObject instanceof String)
+			return new String((String) inObject);
+	
+		if (inObject instanceof Integer)
+			return new Integer((Integer) inObject);
+	
+		if (inObject instanceof Float)
+			return new Float((Float) inObject);
+	
+		if (inObject instanceof Program)
+			return new Program((Program) inObject);
+	
+		if (inObject instanceof Instruction)
+			return inObject; // no need to copy; instructions are singletons
+	
+		if (inObject instanceof Stack) 
+			return ((Stack)inObject).clone();
+		
+		return null;
+	}
+
 }

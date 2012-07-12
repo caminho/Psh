@@ -48,6 +48,13 @@ public class intStack extends Stack {
 		return hash;
 	}
 
+	@Override
+	public intStack clone() {
+		intStack stack = (intStack)super.clone();
+		stack._stack = this._stack.clone();
+		return stack;
+	}
+	
 	void resize(int inSize) {
 		int newstack[] = new int[inSize];
 

@@ -27,9 +27,7 @@ public class Program extends ObjectStack implements Serializable {
 
 
 	/**
-	 * Constructs an empty Program.
-	 * 
-	 * @deprecated
+	 * Constructs an empty Program. 
 	 */
 
 	public Program() {
@@ -316,32 +314,6 @@ public class Program extends ObjectStack implements Serializable {
 		result += ")";
 
 		return result;
-	}
-
-	/**
-	 * Creates a copy of an object suitable for adding to a Push Program. Java's
-	 * clone() is unfortunately useless for this task.
-	 */
-
-	private Object cloneforprogram(Object inObject) {
-		// Java clone() is useless :(
-
-		if (inObject instanceof String)
-			return new String((String) inObject);
-
-		if (inObject instanceof Integer)
-			return new Integer((Integer) inObject);
-
-		if (inObject instanceof Float)
-			return new Float((Float) inObject);
-
-		if (inObject instanceof Program)
-			return new Program((Program) inObject);
-
-		if (inObject instanceof Instruction)
-			return inObject; // no need to copy; instructions are singletons
-
-		return null;
 	}
 
 }

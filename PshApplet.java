@@ -18,11 +18,14 @@ import java.applet.*;
 
 import org.spiderland.Psh.*;
 
+import ec.util.MersenneTwisterFast;
+
 public class PshApplet extends Applet {
 	public static final long serialVersionUID = 2L;
 
 
 	Interpreter _interpreter = new Interpreter();
+	
 
 	public void init() {
 		try {

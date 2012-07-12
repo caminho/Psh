@@ -47,6 +47,13 @@ public class booleanStack extends Stack {
 			hash = 41 * hash + Boolean.valueOf(_stack[i]).hashCode();
 		return hash;
 	}
+	
+	@Override
+	public booleanStack clone() {
+		booleanStack stack = (booleanStack) super.clone();
+		stack._stack = this._stack.clone();
+		return stack;
+	}
 
 	void resize(int inSize) {
 		boolean newstack[] = new boolean[inSize];

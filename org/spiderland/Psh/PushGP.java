@@ -18,6 +18,8 @@ package org.spiderland.Psh;
 
 import java.util.*;
 
+import ec.util.MersenneTwisterFast;
+
 /**
  * The Push Genetic Programming core class.
  */
@@ -172,6 +174,7 @@ abstract public class PushGP extends GA {
 					"interpreter-class must inherit from class Interpreter"));
 
 		_interpreter = (Interpreter) iObject;
+		_interpreter.Initialize(this._RNG);
 		_interpreter.SetInstructions(new Program(GetParam("instruction-set")));
 		_interpreter.SetRandomParameters(minRandomInt, maxRandomInt,
 				randomIntResolution, minRandomFloat, maxRandomFloat,

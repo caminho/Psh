@@ -59,6 +59,15 @@ public class GenericStack<T> extends Stack {
 		hash = 37 * hash + Arrays.deepHashCode(this._stack);
 		return hash;
 	}
+	
+	@Override
+	public GenericStack<T> clone() {
+		@SuppressWarnings("unchecked")
+		GenericStack<T> stack = (GenericStack<T>)super.clone();
+		stack._stack = this._stack.clone();
+		// no deep clone here
+		return stack;
+	}
 
 	boolean comparestack(T inOther[], int inOtherSize) {
 		if (inOtherSize != _size)
