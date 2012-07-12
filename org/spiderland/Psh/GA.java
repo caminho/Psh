@@ -314,7 +314,7 @@ public abstract class GA implements Serializable {
 
 			Checkpoint();
 
-			//System.gc();
+			System.gc();
 			
 			_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
 			_generationCount++;
