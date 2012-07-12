@@ -26,8 +26,11 @@
 
 ### Setup some standard GP parameters
 
+print-parameters = false
+#seed = 1
+
 tournament-size         = 7
-trivial-geography-radius= 10
+trivial-geography-radius= 0
 max-points-in-program	= 100
 mutation-mode		= fair
 fair-mutation-range     = .5
@@ -52,7 +55,7 @@ target-function-string = y = 12x^2 + 5
 ### how fitness scores are computed.  The IntSymbolicRegression
 ### class uses a set of int inputs and a single output.
 
-problem-class		= org.spiderland.Psh.ProbClass.IntSymbolicRegression
+problem-class		= org.spiderland.Psh.ProbClass.IntSymbolicRegressionShort
 
 #This test case is for y = 12x^2 + 5
 test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )

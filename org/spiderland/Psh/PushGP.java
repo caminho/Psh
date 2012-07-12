@@ -25,7 +25,7 @@ import ec.util.MersenneTwisterFast;
  */
 abstract public class PushGP extends GA {
 	private static final long serialVersionUID = 1L;
-	protected static final boolean printParameters = false;
+	protected boolean printParameters = false;
 	
 	protected Interpreter _interpreter;
 	protected int _maxRandomCodeSize;
@@ -51,6 +51,20 @@ abstract public class PushGP extends GA {
 	protected String _targetFunctionString;
 
 	protected void InitFromParameters() throws Exception {
+		
+		if(Float.isNaN(GetFloatParam("seed", true))){
+			_seed = System.currentTimeMillis();
+		}
+		else{
+			_seed = (int) GetFloatParam("seed", true);
+		}
+		this._RNG.setSeed(_seed);
+		
+		printParameters = false; 
+		if ("true".equals(GetParam("print-parameters", true))) {
+			printParameters = true;
+		}
+		
 		// Default parameters to be used when optional parameters are not
 		// given.
 		float defaultFairMutationRange = 0.3f;
@@ -172,7 +186,7 @@ abstract public class PushGP extends GA {
 		if (!(iObject instanceof Interpreter))
 			throw (new Exception(
 					"interpreter-class must inherit from class Interpreter"));
-
+		
 		_interpreter = (Interpreter) iObject;
 		_interpreter.Initialize(this._RNG);
 		_interpreter.SetInstructions(new Program(GetParam("instruction-set")));

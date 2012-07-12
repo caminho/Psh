@@ -25,6 +25,9 @@ include standard.pushgp
 
 ### Setup some standard GP parameters
 
+print-parameters = false
+#seed = 1
+
 population-size 	= 2000
 execution-limit		= 80
 tournament-size 	= 7
@@ -36,7 +39,7 @@ fair-mutation-range	= .3
 
 ### New Parameters since version 0.1
 
-trivial-geography-radius= 10
+trivial-geography-radius= 0
 
 simplification-percent	= 5
 simplify-flatten-percent= 20
@@ -52,7 +55,7 @@ target-function-string = y = 12x^2 + 5
 ### how fitness scores are computed.  The FloatSymbolicRegression
 ### class uses a set of float inputs and a single output.
 
-problem-class		= org.spiderland.Psh.ProbClass.FloatSymbolicRegression
+problem-class		= org.spiderland.Psh.ProbClass.FloatSymbolicRegressionShort
 
 test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )
 

@@ -23,7 +23,10 @@
 
 ### Setup required parameters
 
-problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
+print-parameters = false
+#seed = 1
+
+problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegressionShort
 
 max-generations = 200
 population-size = 2000
@@ -45,7 +48,7 @@ instruction-set = (registered.float input.makeinputs1)
 
 ### Setup Optional Parameters
 
-trivial-geography-radius = 20
+trivial-geography-radius = 0
 simplify-flatten-percent = 20
 mutation-mode = fair
 fair-mutation-range = .5

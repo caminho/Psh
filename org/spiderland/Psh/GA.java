@@ -248,13 +248,6 @@ public abstract class GA implements Serializable {
 		if (_outputfile != null)
 			_outputStream = new FileOutputStream(new File(_outputfile));
 		
-		if(Float.isNaN(GetFloatParam("seed", true))){
-			_seed = System.currentTimeMillis();
-		}
-		else{
-			_seed = (int) GetFloatParam("seed", true);
-		}
-		this._RNG.setSeed(_seed);
 	}
 
 	/**
@@ -517,7 +510,6 @@ public abstract class GA implements Serializable {
 
 			return (index % inPopsize);
 		} else {
-			if (inPopsize == 0) return 0;
 			return _RNG.nextInt(inPopsize);
 		}
 	}
